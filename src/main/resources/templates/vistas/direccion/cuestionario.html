@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="vistas/index/index :: head">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside th:replace="vistas/index/index :: nav-bar"></aside>
+    <div class="container text-white">
+        <h1 th:text="${titulo}"></h1>
+        <form th:action="@{/vistas/direccion/save}" th:object="${direccion}" method="post">
+            <input type="hidden" th:field="*{id_direccion}"/>
+            <div class="form-group row">
+                <label class="col-md 2" for="calle">Calle: </label>
+                <input type="text" th:field="*{calle}" class="form-control" id="calle" placeholder="Escriba su calle">
+            </div>
+            <div class="form-group row">
+                <label class="col-md 2" for="codigoPostal">codigo postal: </label>
+                <input type="text" th:field="*{codigo_postal}" class="form-control" id="codigoPostal" placeholder="Escriba su codigo postal">
+            </div>
+            <div class="form-group row">
+                <label class="col-md 2" for="numeroExterior">Numero exterior: </label>
+                <input type="text" th:field="*{numero_exterior}" class="form-control" id="numeroExterior" placeholder="Escriba su numero ext">
+            </div>
+            <div class="form-group row">
+                <label class="col-md 2" for="colonia">Colonia: </label>
+                <select class="form-control" th:field="*{id_colonia_fk}" id="colonia" placeholder="Coloque su colonia">
+                    <option th:each="cl:${colonias}" th:text="${cl.nombre_colonia}" th:value="${cl.id_colonia}"></option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-md 2" for="ciudad">Ciudad: </label>
+                <select class="form-control" th:field="*{id_colonia_fk.id_ciudad_fk}" id="ciudad" placeholder="Coloque su ciudad">
+                    <option th:each="cl:${ciudades}" th:text="${cl.nombre_ciudad}" th:value="${cl.id_ciudad}"></option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary btn-sm" value="Guardar"/>
+            </div>
+        </form>
+    </div>
+    <div>
+        <footer th:replace="vistas/index/index :: footer"></footer>
+        <aside th:replace="vistas/index/index :: nav-bar2"></aside>
+    </div>
+</div>
+
+</body>
+</html>

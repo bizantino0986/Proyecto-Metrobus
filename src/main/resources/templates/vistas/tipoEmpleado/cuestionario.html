@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+</head>
+<body>
+<header th:replace="plantilla/template :: header"></header>
+
+<h1 th:text="${titulo}"></h1>
+<div class="container">
+    <form th:action="@{/vistas/tipo-empleado/save}" th:object="${tipoEmpleado}" method="post">
+        <input type="hidden" th:field="*{id_tipo_empleado}"/>
+        <div class="form-group row">
+            <label class="col-md 2" for="tipoEmpleado">Tipo de Empleado: </label>
+            <input type="text" th:field="*{tipo_empleado}" class="form-control" id="tipoEmpleado" placeholder="Coloque el tipo de empleado">
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary btn-sm" value="Guardar"/>
+        </div>
+    </form>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="vistas/index/index :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside th:replace="vistas/index/index :: nav-bar"></aside>
+    <div class="container text-white">
+        <h1 th:text="${titulo}"></h1>
+        <form th:action="@{/vistas/empleado/save}" th:object="${empleado}" method="post">
+            <input type="hidden" th:field="*{id_empleado}">
+            <input type="hidden" th:field="*{direccion.id_direccion}">
+            <div class="form-group row">
+                <label class="col-md 2" for="nombre">Nombre:</label>
+                <input type="text" id="nombre" th:field="*{nombre_empleado}" class="form-c">
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="paterno">Paterno: </label>
+                <input type="text" th:field="*{apellido_paterno}" class="form-control" id="paterno" placeholder="Escriba su calle">
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="email">Materno: </label>
+                <input type="text" th:field="*{apellido_materno}" class="form-control" id="materno" placeholder="Escriba su calle">
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="email">Email: </label>
+                <input type="text" th:field="*{email}" class="form-control" id="email" placeholder="Escriba su calle">
+            </div>
+            <div class="input-group">
+                <label>Fecha de nacimiento:</label>
+                <div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <input type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask th:field="*{fecha_nacimiento}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="telefono">Telefono: </label>
+                <input type="number" th:field="*{telefono}" class="form-control" id="telefono" placeholder="Escriba su calle">
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="sueldo">Sueldo: </label>
+                <input type="number" th:field="*{sueldo}" class="form-control" id="sueldo" placeholder="Escriba su calle">
+            </div>
+            <div class="input-group">
+                <label class="col-md-2" for="fechaCon">Fecha de contratacion:</label>
+                <div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <input id="fechaCon" type="text" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask th:field="*{fecha_contratacion}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="tipoEmpleado">Puesto: </label>
+                <select class="form-control" th:field="*{tipoEmpleado.id_tipo_empleado}" id="tipoEmpleado" placeholder="Coloque el puesto del empleado">
+                    <option th:each="cl:${tiposEmpleado}" th:text="${cl.tipo_empleado}" th:value="${cl.id_tipo_empleado}"></option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary btn-sm" value="Guardar"/>
+            </div>
+        </form>
+    </div>
+    <div>
+        <footer th:replace="vistas/index/index :: footer"></footer>
+        <aside th:replace="vistas/index/index :: nav-bar2"></aside>
+    </div>
+</div>
+</body>
+</html>

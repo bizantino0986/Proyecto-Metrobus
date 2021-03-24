@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="vistas/index/index :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside th:replace="vistas/index/index :: nav-bar"></aside>
+    <div class="container text-white">
+        <h1 th:text="${titulo}"></h1>
+        <form th:action="@{/vistas/estacion/save}" th:object="${estacion}" method="post">
+            <input type="hidden" th:field="*{id_estacion}">
+            <input type="hidden" th:field="*{id_empleado_fk.id_empleado}">
+            <input type="hidden" th:field="*{id_linea_fk.id_linea}">
+            <div class="form-group row">
+                <label class="col-md 2" for="nombre">Nombre:</label>
+                <input type="text" id="nombre" th:field="*{nombre_estacion}" class="form-c">
+            </div>
+            <div class="input-group">
+                <label>Tiempo siguiente estacion:</label>
+                <div>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+                    </div>
+                    <input type="text" class="form-control" data-inputmask-alias="datetime-local" data-inputmask-inputformat="HH:mm:ss" data-mask th:field="*{tiempo_siguiente_estacion}">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="linea">Linea: </label>
+                <select class="form-control" th:field="*{id_linea_fk.id_linea}" id="linea" placeholder="Coloque la linea">
+                    <option th:each="cl:${lineas}" th:text="${cl.color_linea}" th:value="${cl.id_linea}"></option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="encargado">Encargado: </label>
+                <select class="form-control" th:field="*{id_empleado_fk.id_empleado}" id="encargado" placeholder="Coloque el encargado de estacion">
+                    <option th:each="cl:${empleados}" th:text="${cl.nombre_empleado}+ ' ' + ${cl.apellido_paterno} + ' ' + ${cl.apellido_materno}" th:value="${cl.id_empleado}"></option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary btn-sm" value="Guardar"/>
+            </div>
+        </form>
+    </div>
+    <div>
+        <footer th:replace="vistas/index/index :: footer"></footer>
+        <aside th:replace="vistas/index/index :: nav-bar2"></aside>
+    </div>
+</div>
+</body>
+</html>

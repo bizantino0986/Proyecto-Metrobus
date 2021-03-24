@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="vistas/index/index :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside th:replace="vistas/index/index :: nav-bar"></aside>
+    <div class="container">
+        <h1 th:text="${titulo}" class="title text-white"></h1>
+        <a type="button" class="btn btn-primary btn-sm" th:href="@{/vistas/empleado/cuestionario}">Nuevo registro</a>
+        <table class="table text-white">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Paterno</th>
+                <th scope="col">Materno</th>
+                <th scope="col">Email</th>
+                <th scope="col">Fecha nacimiento</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Sueldo</th>
+                <th scope="col">Fecha contratacion</th>
+                <th scope="col">Puesto</th>
+                <th scope="col">Actualizar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="em:${empleados}">
+                <th scope="row" th:text="${em.id_empleado}"></th>
+                <td th:text="${em.nombre_empleado}"></td>
+                <td th:text="${em.apellido_paterno}"></td>
+                <td th:text="${em.apellido_materno}"></td>
+                <td th:text="${em.email}"></td>
+                <td th:text="${em.fecha_nacimiento.toString().substring(0,10)}"></td>
+                <td th:text="${em.telefono}"></td>
+                <td th:text="${em.sueldo}"></td>
+                <td th:text="${em.fecha_contratacion.toString().substring(0,10)}"></td>
+                <td th:text="${em.tipoEmpleado.tipo_empleado}"></td>
+                <td>
+                    <a type="button" class="btn btn-success btn-sm" th:href="@{/vistas/empleado/actualizar/} + ${em.id_empleado}">
+                        Actualizar</a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-danger btn-sm" th:href="@{/vistas/empleado/eliminar/} + ${em.id_empleado}">
+                        Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <footer th:replace="vistas/index/index :: footer"></footer>
+        <aside th:replace="vistas/index/index :: nav-bar2"></aside>
+    </div>
+</div>
+
+</body>
+</html>

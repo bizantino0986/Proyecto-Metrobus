@@ -1,0 +1,4 @@
+contraseñas de Metrobus
+Usuario - Contraseña
+admin - 1234
+fake1234 - 1234

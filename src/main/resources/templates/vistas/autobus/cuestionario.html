@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="vistas/index/index :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside th:replace="vistas/index/index :: nav-bar"></aside>
+    <div class="container text-white">
+        <h1 th:text="${titulo}"></h1>
+        <form th:action="@{/vistas/autobus/save}" th:object="${autobus}" method="post">
+            <input type="hidden" th:field="*{id_autobus}">
+            <div class="form-group row">
+                <label class="col-md 2" for="modelo">Modelo: </label>
+                <input type="text" id="modelo" th:field="*{modelo_autobus}" class="form-c">
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="conductor">Conductor: </label>
+                <select class="form-control" th:field="*{id_empleado_fk.id_empleado}" id="conductor">
+                    <option th:each="em:${empleados}" th:text="${em.nombre_empleado} + ' ' + ${em.apellido_paterno} + ' ' + ${em.apellido_materno}"
+                            th:value="${em.id_empleado}"></option>
+                </select>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-2" for="tipoAutobus">Tipo autobus: </label>
+                <select class="form-control" th:field="*{tipo_autobus.id_tipo_autobus}" id="tipoAutobus">
+                    <option th:each="ta:${tiposAutobuces}" th:text="${ta.nombre_tipo}" th:value="${ta.id_tipo_autobus}"></option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-primary btn-sm" value="Guardar"/>
+            </div>
+        </form>
+    </div>
+    <div>
+        <footer th:replace="vistas/index/index :: footer"></footer>
+        <aside th:replace="vistas/index/index :: nav-bar2"></aside>
+    </div>
+</div>
+</body>
+</html>

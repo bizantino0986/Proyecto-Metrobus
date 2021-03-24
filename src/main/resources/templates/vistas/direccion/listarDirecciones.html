@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="vistas/index/index :: head"></head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <aside th:replace="vistas/index/index :: nav-bar"></aside>
+    <div class="container">
+        <h1 th:text="${titulo}" class="title text-white"></h1>
+        <a type="button" class="btn btn-primary btn-sm" th:href="@{/vistas/direccion/cuestionario}">Nuevo registro</a>
+        <table class="table text-white">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Calle</th>
+                <th scope="col">Numero Exterior</th>
+                <th scope="col">Codigo postal</th>
+                <th scope="col">Colonia</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">Actualizar</th>
+                <th scope="col">Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="cl:${direcciones}">
+                <th scope="row" th:text="${cl.id_direccion}"></th>
+                <td th:text="${cl.calle}"></td>
+                <td th:text="${cl.numero_exterior}"></td>
+                <td th:text="${cl.codigo_postal}"></td>
+                <td th:text="${cl.id_colonia_fk.nombre_colonia}"></td>
+                <td th:text="${cl.id_colonia_fk.id_ciudad_fk.nombre_ciudad}"></td>
+                <td>
+                    <a type="button" class="btn btn-success btn-sm" th:href="@{/vistas/direccion/actualizar/} + ${cl.id_direccion}">
+                        Actualizar</a>
+                </td>
+                <td>
+                    <a type="button" class="btn btn-danger btn-sm" th:href="@{/vistas/direccion/eliminar/} + ${cl.id_direccion}">
+                        Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <footer th:replace="vistas/index/index :: footer"></footer>
+        <aside th:replace="vistas/index/index :: nav-bar2"></aside>
+    </div>
+</div>
+
+</body>
+</html>
+
